@@ -50,6 +50,14 @@ export CPLUS_INCLUDE_PATH=/usr/include/gdal
 export C_INCLUDE_PATH=/usr/include/gdal
 pip install GDAL
 ```
+
+### For windows create a Conda Environment and set these PATHs:
+
+System Variables:
+* GDAL_DATA = C:\Users\<user>\anaconda3\envs\<env_name>\Library\share
+* PROJ_LIB = C:\Users\<user>\anaconda3\envs\<env_name>\Library\share\proj
+* PATH = C:\Users\dillo\anaconda3\Scripts; C:\Users\dillo\anaconda3 (push to the top of the list)
+
 ---
 
 # Current API:
