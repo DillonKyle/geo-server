@@ -1,8 +1,6 @@
 # GEOREFERENCED FILE SERVER 
 ## Hosted on AWS
 
----
-
 ## Setup AWS Elements
 ### S3 Bucket:
 Setup a basic S3 bucket with default values
@@ -37,8 +35,6 @@ Setup an IAM User with programmtic access, add the custom IAM policicy to it, an
 ---
 
 # Current API:
-
----
 
 ### Upload to S3:
 `localhost:8080/upload/`
