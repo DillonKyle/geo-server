@@ -1,2 +1,4 @@
 node_modules/
 .env
+neg_elev_file.txt
+pos_elev_file.txt

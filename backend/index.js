@@ -15,13 +15,41 @@ const { resolve } = require("path");
 
 const app = express();
 
-app.get('/upload/:key', (req, res) => {
+app.get('/download/:key', (req, res) => {
   const key = req.params.key
   res.attachment(key)
   const readStream = getFileStream(key)
   let writeStream = fs.createWriteStream(path.join('./backend/downloads/', key));
   readStream.pipe(writeStream)
   res.send(res.body)
+})
+
+app.post("/epsg/:tif", (req, res) => {
+  let promises = []
+  
+  const tif_streamToFile = () => {
+    return new Promise((resolve, reject) => {
+      const p_tif = `${req.params.tif}`
+      const tif_readStream = getFileStream(p_tif)
+      let w_tif = fs.createWriteStream(path.join('./backend/downloads/', p_tif));
+      tif_readStream.pipe(w_tif).on("close", () => {
+        resolve(w_tif.path)
+      }).on("error", reject)
+    })
+  }
+
+  promises.push(tif_streamToFile())
+
+  Promise.all(promises).then(async() => {
+      const tif = await tif_streamToFile();
+      return tif
+  }).then(async (tif) => {
+    const pythonProcess = spawn('python',['./backend/python_modules/get_epsg.py', tif]);
+    pythonProcess.stdout.on('data', (data) => {
+      epsg = JSON.parse(data.toString())
+      res.json({EPSG_Code: epsg})
+    })
+  })
 })
 
 app.post("/cut-fill/:topo/:base", (req, res) => {
@@ -65,8 +93,7 @@ app.post("/cut-fill/:topo/:base", (req, res) => {
         output = JSON.parse(data.toString())
         res.json(output)
     })
-})
-
+  })
 })
 
 app.post("/upload", upload.single('geo_file'), async (req, res) => {

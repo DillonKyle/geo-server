@@ -35,3 +35,25 @@ Setup an IAM User with programmtic access, add the custom IAM policicy to it, an
 ### Store the Region, S3 Bucket Name, Access Key ID, and Secret Access Key Id in a .env file
 
 ---
+
+# Current API:
+
+---
+
+### Upload to S3:
+`localhost:8080/upload/`
+POST Request with form containing geo_file:path-to-file
+
+### Download from S3:
+`localhost:8080/download/:key`
+GET Request where key=filename of object to download
+
+### Generate Cut/Fill Report"
+`localhost:8080/cut-fill/:topo/:base`
+POST Request where topo=filename of object to measure and base=filename of object to measure against
+
+### Get EPSG Code from file:
+`localhost:8080/epsg/:tif`
+POST request where tif=filename of object to analyze
+
+---
