@@ -34,6 +34,24 @@ Setup an IAM User with programmtic access, add the custom IAM policicy to it, an
 
 ---
 
+# Python Dependencies:
+*pandas
+*gdal
+
+### Installing GDAL on Linux:
+```
+#!/usr/bin/env bash
+
+sudo add-apt-repository ppa:ubuntugis/ppa && sudo apt-get update
+sudo apt-get update
+sudo apt-get install gdal-bin
+sudo apt-get install libgdal-dev
+export CPLUS_INCLUDE_PATH=/usr/include/gdal
+export C_INCLUDE_PATH=/usr/include/gdal
+pip install GDAL
+```
+---
+
 # Current API:
 
 ### Upload to S3:
