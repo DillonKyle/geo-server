@@ -54,9 +54,9 @@ pip install GDAL
 ### For windows create a Conda Environment and set these PATHs:
 
 System Variables:
-* GDAL_DATA = C:\Users\\<user>\anaconda3\envs\\<env_name>\Library\share
-* PROJ_LIB = C:\Users\\<user>\anaconda3\envs\\<env_name>\Library\share\proj
-* PATH = C:\Users\\<user>\anaconda3\Scripts; C:\Users\\<user>\anaconda3 (push to the top of the list)
+* GDAL_DATA = C:\Users\user_name\anaconda3\envs\env_name\Library\share
+* PROJ_LIB = C:\Users\user_name\anaconda3\envs\env_name\Library\share\proj
+* PATH = C:\Users\user_name\anaconda3\Scripts; C:\Users\user_name\anaconda3 (push to the top of the list)
 
 ---
 
