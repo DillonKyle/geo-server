@@ -30,4 +30,8 @@ Use the JSON object below (replacing the bucket name with your s3 bucket's name)
 ### IAM User:
 Setup an IAM User with programmtic access, add the custom IAM policicy to it, and retrieve the Access Key ID and the Secret Access Key ID.
 
+---
+
 ### Store the Region, S3 Bucket Name, Access Key ID, and Secret Access Key Id in a .env file
+
+---
