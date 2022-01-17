@@ -35,8 +35,8 @@ Setup an IAM User with programmtic access, add the custom IAM policicy to it, an
 ---
 
 # Python Dependencies:
-*pandas
-*gdal
+* pandas
+* gdal
 
 ### Installing GDAL on Linux:
 ```
