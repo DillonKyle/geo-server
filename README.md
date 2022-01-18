@@ -70,7 +70,7 @@ POST Request with form containing geo_file:path-to-file
 `localhost:8080/download/:key`
 GET Request where key=filename of object to download
 
-### Generate Cut/Fill Report"
+### Generate Cut/Fill Report:
 `localhost:8080/cut-fill/:topo/:base`
 POST Request where topo=filename of object to measure and base=filename of object to measure against
 
