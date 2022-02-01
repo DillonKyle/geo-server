@@ -1,7 +1,6 @@
 import sys
-import gdal
-import osr
-import pandas as pd
+from osgeo import gdal
+from osgeo import osr
 
 ras = gdal.Open(sys.argv[1])
 data = ras.GetProjection()

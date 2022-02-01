@@ -1,15 +1,26 @@
 const express = require("express");
 const multer = require("multer");
-const upload = multer({ dest: 'uploads/'})
+// const upload = multer({ dest: 'uploads/'})
 const fs = require('fs');
 const util = require('util');
 const unlinkFile = util.promisify(fs.unlink)
 const path = require("path");
 const spawn = require('child_process').spawn;
 
-const { uploadFile, getFileStream } = require('./s3')
+const { file_sync } = require('./file_sync')
+const { uploadFile, getFileStream, upload_large_file } = require('./s3')
 const { Analyze } = require('./c_node_modules/cut_fill_report');
 const { resolve } = require("path");
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  }
+})
+const upload = multer({storage: storage})
 
 // const PORT = process.env.PORT || 3001;
 
@@ -98,12 +109,34 @@ app.post("/cut-fill/:topo/:base", (req, res) => {
 
 app.post("/upload", upload.single('geo_file'), async (req, res) => {
   const file = req.file
-  // console.log(file)
+  console.log(file)
   const result = await uploadFile(file)
   // console.log(result)
   await unlinkFile(file.path)
   const description = req.body.description
   res.send({filePath: `/upload/${result.Key}`})
+})
+
+//upload_dir route works and synchroniously uploads files. Can we get it to run asynchroniously? 
+//Current Speed = 5:37.801 (m:ss.mmm) for 847.9 MB
+
+app.post("/upload_dir", upload.any('upload_images'), async (req, res) => {
+  var files = req.files
+  res.setHeader('Content-Type', 'text/html');
+  console.time('upload_timer')
+  for(i = 0; i < files.length; i++){
+    console.log(files[i].path)
+    const result = await upload_large_file(files[i].path, 'dir/')
+    console.log(result)
+    res.write("<h4>Uploaded: " + files[i].filename + "</h4>")
+    fs.unlink(files[i].path, (err) => {
+      if(err){
+        throw err
+      }
+    })
+  }
+  console.timeEnd('upload_timer')
+  res.end()
 })
 
 app.listen(8080, () => {
