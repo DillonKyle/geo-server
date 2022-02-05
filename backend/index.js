@@ -107,7 +107,7 @@ app.post("/cut-fill/:topo/:base", (req, res) => {
   })
 })
 
-app.post("/upload", upload.single('geo_file'), async (req, res) => {
+app.post("/upload", upload.single('upload_file'), async (req, res) => {
   const file = req.file
   console.log(file)
   const result = await uploadFile(file)
@@ -120,7 +120,7 @@ app.post("/upload", upload.single('geo_file'), async (req, res) => {
 //upload_dir route works and synchroniously uploads files. Can we get it to run asynchroniously? 
 //Current Speed = 5:37.801 (m:ss.mmm) for 847.9 MB
 
-app.post("/upload_dir", upload.any('upload_images'), async (req, res) => {
+app.post("/upload_dir", upload.any('upload_files'), async (req, res) => {
   var files = req.files
   res.setHeader('Content-Type', 'text/html');
   console.time('upload_timer')
