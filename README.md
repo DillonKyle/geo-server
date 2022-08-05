@@ -68,7 +68,7 @@ POST Request with form containing upload_file:path-to-file
 
 ### Upload Multiple Files to S3
 `localhost:8080/upload-dir/`
-POST Request with form conting upload_files:multiple-paths
+POST Request with form containing upload_files:multiple-paths
 
 ### Download from S3:
 `localhost:8080/download/:key`
